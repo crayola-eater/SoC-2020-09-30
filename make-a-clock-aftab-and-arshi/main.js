@@ -13,7 +13,7 @@ const timeData = {
   },
 };
 
-const getNowAsObject = () => {
+const getHms = () => {
   const now = new Date();
   return {
     hours:
@@ -30,7 +30,7 @@ const getNowAsObject = () => {
 };
 
 function tick() {
-  const now = getNowAsObject();
+  const now = getHms();
   Object.values(timeData).forEach((o) => {
     const rotation = o.getDegrees(now);
     o.el.style.transform = `rotate(${rotation}deg)`;

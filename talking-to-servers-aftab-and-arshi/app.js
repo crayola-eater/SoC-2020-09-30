@@ -1,4 +1,5 @@
-const INITIAL_PLACEHOLDER_QUOTE = document.querySelector("#kanye-quote").value;
+const INITIAL_PLACEHOLDER_QUOTE = document.querySelector("#kanye-quote")
+  .innerText;
 
 async function getQuote() {
   const response = await fetch("https://api.kanye.rest/");
