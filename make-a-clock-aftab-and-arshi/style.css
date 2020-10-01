@@ -25,7 +25,10 @@ img {
   position: absolute;
   height: 120px;
   border-top: 120px solid black;
+  transition: transform 2s;
+  will-change: transform;
 }
+
 #seconds {
   width: 2px;
   border-color: red;
