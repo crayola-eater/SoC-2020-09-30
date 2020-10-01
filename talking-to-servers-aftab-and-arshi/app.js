@@ -1,3 +1,5 @@
+const INITIAL_PLACEHOLDER_QUOTE = document.querySelector("#kanye-quote").value;
+
 async function getQuote() {
   const response = await fetch("https://api.kanye.rest/");
   const data = await response.json();
@@ -18,18 +20,13 @@ function appendToList(text) {
   ol.appendChild(li);
 }
 
-// Appends to the list based on whether it's
-// the first time this function is being invoked
-// and whether the text already exists in the list.
-const maybeAppendToList = (function () {
-  let firstTime = true;
-  return (text) => {
-    if (!firstTime && !isDuplicate(text)) {
-      return appendToList(text);
-    }
-    firstTime = false;
-  };
-})();
+// Appends to the list conditionally depending on whether the quote
+// is a duplicate/placeholder or not.
+function maybeAppendToList(text) {
+  if (text !== INITIAL_PLACEHOLDER_QUOTE && !isDuplicate(text)) {
+    appendToList(text);
+  }
+}
 
 function isDuplicate(text) {
   return [...document.querySelectorAll("#kanye-quote-history > li")].some(
