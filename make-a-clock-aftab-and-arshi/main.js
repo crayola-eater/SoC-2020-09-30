@@ -9,32 +9,25 @@ const timeData = {
   },
   h: {
     el: document.querySelector("#hours"),
-    getDegrees: ({ hours }) => (360 / 12) * hours,
+    getDegrees: ({ hours }) => (360 / 24) * hours,
   },
 };
 
-const getHms = () => {
+const getHoursMinutesSeconds = () => {
   const now = new Date();
   return {
-    hours:
-      now.getHours() +
-      now.getMinutes() / 60 +
-      now.getSeconds() / 3600 +
-      now.getMilliseconds() / 3600e3,
-
-    minutes:
-      now.getMinutes() + now.getSeconds() / 60 + now.getMilliseconds() / 60e3,
-
-    seconds: now.getSeconds() + now.getMilliseconds() / 1e3,
+    hours: now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600,
+    minutes: now.getMinutes() + now.getSeconds() / 60,
+    seconds: now.getSeconds(),
   };
 };
 
 function tick() {
-  const now = getHms();
+  const now = getHoursMinutesSeconds();
   Object.values(timeData).forEach((o) => {
     const rotation = o.getDegrees(now);
     o.el.style.transform = `rotate(${rotation}deg)`;
   });
 }
 
-const intervalId = setInterval(tick, 1e3);
+const intervalId = setInterval(tick, 1000);
